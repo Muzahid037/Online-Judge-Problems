@@ -1,29 +1,83 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
+
 using namespace std;
 
 int main()
 {
     int t;
     cin>>t;
-
-    for(int i=0;i<t;i++)
+    for(int i=0; i<t; i++)
     {
         int a,b,c,r;
         cin>>a>>b>>c>>r;
 
-        int full_dist=abs(a-b);
-        int left=c-r;
-        int right=c+r;
+        int big,small;
 
-        int st_unv=max(left,min(a,b));
-        int ed_unv=min(right,max(a,b));
-        int unv_dist=ed_unv-st_unv;
-        int ans=full_dist-max(0,unv_dist);
+        if(a==b){cout<<"0"<<endl;continue;}
+        else if(a>b)
+        {
+            big=a;
+            small=b;
+        }
+        else
+        {
+            big=b;
+            small=a;
+        }
 
-        cout<<ans<<endl;
+        if(c<big && c>small)
+        {
+            if((big-small)-(2*r)<0){cout<<"0"<<endl;}
+            else{cout<<(big-small)-(2*r)<<endl;}
+        }
+        else if(c==big || c==small)
+        {
+            if((big-small)-r<0){cout<<"0"<<endl;}
+            else {cout<<(big-small)-r<<endl;}
+        }
+        else if(c>big)
+        {
+            int y;
+            int x=c-big;
+            if(r>x)
+            {
+                y=r-x;
+            }
+            else
+            {
+                y=0;
+            }
+            if(((big-small)-y)<0)
+            {
+                cout<<"0"<<endl;
+            }
+            else
+            {
+                cout<<(big-small)-y<<endl;
+            }
+        }
+        else if(c<small)
+        {
+            int y;
+            int x=small-c;
+            if(r>x)
+            {
+                y=r-x;
+            }
+            else
+            {
+                y=0;
+            }
+             if(((big-small)-y)<0)
+            {
+                cout<<"0"<<endl;
+            }
+            else
+            {
+                cout<<(big-small)-y<<endl;
+            }
+        }
     }
-
-
 
 
     return 0;

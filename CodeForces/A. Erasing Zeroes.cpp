@@ -1,43 +1,69 @@
 #include<bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-
-vector<int>cnt;
-
 int main()
 {
-
     int t;
     cin>>t;
     while(t--)
     {
         string s;
         cin>>s;
-
         int ln=s.size();
-        int i=0,j=0;
-        while(i<ln-1)
+        int eraseZero=0,posOfOne=-1;
+        for(int i=0;i<ln;i++)
         {
-            if(s[i]==0){i++;}
-            else if(s[i]==1 && s[i+1]==1){i++;}
-            else if(s[i]==1 && s[i+1]==0)
+            if(s[i]=='1')
             {
-                i++;
-                while(s[i]==0)
-                {
-                    cnt[j]++;
-                }
-                j++;
+//                   if(posOfOne==-1)
+//                    {
+//                        posOfOne=i;
+//                    }
+                    if(posOfOne!=-1)
+                    {
+                        eraseZero+=(i-posOfOne-1);
+//                        posOfOne=i;
+                    }
+                     posOfOne=i;
             }
         }
-        for(vector<int>::iterator it=cnt.begin();it!=cnt.end();it++)
-        {
-            cout<<*it<<endl;
-        }
-
-
+       cout<<eraseZero<<endl;
     }
-
-
     return 0;
 }
+
+/*
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        string s;
+        cin>>s;
+        int ln=s.size();
+        int eraseZero=0;
+        int fstOneidx=0;
+        int lastOneidx=ln-1;
+        while(s[fstOneidx]=='0')
+        {
+            fstOneidx++;
+        }
+        while(s[lastOneidx]=='0')
+        {
+            lastOneidx--;
+        }
+        //cout<<"fstOneidx: "<<fstOneidx<<" lastOneidx: "<<lastOneidx<<endl;
+        for(int i=fstOneidx+1;i<=lastOneidx-1;i++)
+        {
+            if(s[i]=='0')
+            {
+                eraseZero++;
+            }
+        }
+        cout<<eraseZero<<endl;
+    }
+    return 0;
+}
+*/
