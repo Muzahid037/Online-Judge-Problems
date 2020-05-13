@@ -1,40 +1,52 @@
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
+typedef long long int ll;
 int main()
 {
-    string a;
-    int c0=0,c1=0;
-    cin>>a;
-    for(int i=0;a[i]!='\0';i++)
+    int n;
+    cin>>n;
+    string s,ans;
+    map<string,int>mp;
+    int mx=0;
+    while(n--)
     {
-        if(a[i]=='0')
-            {
-                c0++;
-        if(c0>=7)
-            {
-                break;
-        }
-        }
-        else
+        cin>>s;
+        mp[s]++;
+        if(mx<mp[s]){ mx=mp[s]; ans=s;}
+    }
+    cout<<ans<<endl;
+    return 0;
+}
+
+
+///----------------------------------///
+/*
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long int ll;
+int main()
+{
+    int n;
+    cin>>n;
+    string s;
+    map<string,int>mp;
+    set<string>str;
+    while(n--)
+    {
+        cin>>s;
+        str.insert(s);
+        mp[s]++;
+    }
+    string ans=s;
+    for(set<string>::iterator it=str.begin(); it!=str.end(); it++)
+    {
+        if(mp[*it]>mp[s])
         {
-            c0=0;
-        }
-        if(a[i]=='1')
-            {
-                c1++;
-        if(c1>=7)
-            {
-                break;
-        }
-        }
-        else
-        {
-            c1=0;
+            ans=*it;
         }
     }
-    if(c0>=7||c1>=7){cout<<"YES"<<endl;}
-    else
-    {
-        cout<<"NO"<<endl;
-        }
+    cout<<ans<<endl;
+
+    return 0;
 }
+*/
