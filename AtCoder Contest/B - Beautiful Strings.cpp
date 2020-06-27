@@ -100,7 +100,7 @@ const double eps = 1e-9;
 const int inf = 2000000000;
 const ll infLL = 9000000000000000000;
 #define MOD 1000000007
-
+int cnt[100];
 int main()
 {
     Boost();
@@ -110,21 +110,25 @@ int main()
     //cin>>t;
     while(t--)
     {
-        int n,ans=inf;
-        cin>>n;
-        int a[n+5];
-        for(int i=0; i<n; i++) cin>>a[i];
-
-        for(int i=-100;i<=100;i++)
+        string s;
+        cin>>s;
+        int n=s.size(),ev=0;
+        for(int i=0; i<n; i++)
         {
-            int cost=0;
-            for(int j=0;j<n;j++)
-            {
-               cost+=(i-a[j])*(i-a[j]);
-            }
-            ans=min(ans,cost);
+            int val=s[i]-'0';
+            //cout<<val<<" ";
+            cnt[val]++;
         }
-         cout<<ans<<endl;
+        for(int i=49; i<=74; i++)
+        {
+            //cout<<cnt[i]<<" ";
+            if(cnt[i]%2==1)
+            {
+                cout<<"No"<<endl;
+                return 0;
+            }
+        }
+        cout<<"Yes"<<endl;
     }
     return 0;
 }

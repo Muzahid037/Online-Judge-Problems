@@ -110,21 +110,28 @@ int main()
     //cin>>t;
     while(t--)
     {
-        int n,ans=inf;
-        cin>>n;
-        int a[n+5];
-        for(int i=0; i<n; i++) cin>>a[i];
+        string s;
+        cin>>s;
+        int n=s.size(),l=-1,r=-1;
 
-        for(int i=-100;i<=100;i++)
+        for(int i=0; i<n; i++)
         {
-            int cost=0;
-            for(int j=0;j<n;j++)
+            int idx=i+1;
+            if(i<n-1 && s[i]==s[i+1])
             {
-               cost+=(i-a[j])*(i-a[j]);
+                l=idx;
+                r=idx+1;
+                break;
             }
-            ans=min(ans,cost);
+            if(i<n-2 && s[i]==s[i+2])
+            {
+                l=idx;
+                r=idx+2;
+                break;
+            }
         }
-         cout<<ans<<endl;
+        cout<<l<<" "<<r<<endl;
     }
     return 0;
 }
+
