@@ -85,13 +85,13 @@ char cpp(char c)
 ///------------Sorting STL----------///
 struct func
 {
-	//this is a sample overloading function for sorting stl
-	bool operator()(pii const &a, pii const &b)
-	{
-		if(a.F==b.F)
-			return (a.S<b.S);
-		return (a.F<b.F);
-	}
+    //this is a sample overloading function for sorting stl
+    bool operator()(pii const &a, pii const &b)
+    {
+        if(a.F==b.F)
+            return (a.S<b.S);
+        return (a.F<b.F);
+    }
 };
 
 ///---CONSTANT---///
@@ -103,23 +103,56 @@ const ll infLL = 9000000000000000000;
 
 int main()
 {
-    Boost();
+    //Boost();
 
     int t;
     t=1;
-    //cin>>t;
+    cin>>t;
     while(t--)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
-        for(int i=0;i<n;i++)
+        ll n,flag=0;
+        cin>>n;
+        ll a[n+5];
+        map<ll,ll>already;
+        for(ll i=0; i<n; i++)
         {
-            for(int j=0)
+            cin>>a[i];
+            if(already[a[i]]==0)
+            {
+                already[a[i]]=1;
+            }
+            else flag=1;
         }
-
+        if(flag==1)
+        {
+            cout<<"NO"<<endl;
+            continue;
+        }
+        for(ll i=0; i<n-1; i++)
+        {
+            ll tmp=a[i];
+            for(ll j=i+1; j<n; j++)
+            {
+                tmp=tmp|a[j];
+                //cout<<tmp<<" "<<already[tmp]<<endl;
+                if(already[tmp]==0)
+                {
+                    already[tmp]=1;
+                }
+                else
+                {
+                    flag=1;
+                    break;
+                }
+            }
+            if(flag==1)
+            {
+                break;
+            }
+        }
+        if(flag==0) cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
+        already.clear();
     }
     return 0;
 }
-

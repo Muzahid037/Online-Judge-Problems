@@ -85,13 +85,13 @@ char cpp(char c)
 ///------------Sorting STL----------///
 struct func
 {
-	//this is a sample overloading function for sorting stl
-	bool operator()(pii const &a, pii const &b)
-	{
-		if(a.F==b.F)
-			return (a.S<b.S);
-		return (a.F<b.F);
-	}
+    //this is a sample overloading function for sorting stl
+    bool operator()(pii const &a, pii const &b)
+    {
+        if(a.F==b.F)
+            return (a.S<b.S);
+        return (a.F<b.F);
+    }
 };
 
 ///---CONSTANT---///
@@ -107,18 +107,40 @@ int main()
 
     int t;
     t=1;
-    //cin>>t;
+    cin>>t;
     while(t--)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
-        for(int i=0;i<n;i++)
+        int n,x,y,ansx=-1,ansy=-1;
+        cin>>n;
+        vector<int>l,r;
+        for(int i=1; i<=(4*n-1); i++)
         {
-            for(int j=0)
+            cin>>x>>y;
+            l.pb(x);
+            r.pb(y);
         }
-
+        sort(l.begin(),l.end());
+        sort(r.begin(),r.end());
+        //cout<<r.size()<<" "<<l.size()<<endl;
+        for(int i=0; i<l.size()-1; i+=2)
+        {
+            if(l[i]!=l[i+1])
+            {
+                ansx=l[i];
+                break;
+            }
+        }
+        if(ansx==-1) ansx=l[l.size()-1];
+        for(int i=0; i<r.size()-1; i+=2)
+        {
+            if(r[i]!=r[i+1])
+            {
+                ansy=r[i];
+                break;
+            }
+        }
+        if(ansy==-1) ansy=r[r.size()-1];
+        cout<<ansx<<" "<<ansy<<endl;
     }
     return 0;
 }

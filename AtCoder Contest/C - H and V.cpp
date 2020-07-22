@@ -85,13 +85,13 @@ char cpp(char c)
 ///------------Sorting STL----------///
 struct func
 {
-	//this is a sample overloading function for sorting stl
-	bool operator()(pii const &a, pii const &b)
-	{
-		if(a.F==b.F)
-			return (a.S<b.S);
-		return (a.F<b.F);
-	}
+    //this is a sample overloading function for sorting stl
+    bool operator()(pii const &a, pii const &b)
+    {
+        if(a.F==b.F)
+            return (a.S<b.S);
+        return (a.F<b.F);
+    }
 };
 
 ///---CONSTANT---///
@@ -110,16 +110,38 @@ int main()
     //cin>>t;
     while(t--)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
-        for(int i=0;i<n;i++)
+        int h,w,k,ans=0;
+        cin>>h>>w>>k;
+        char c[h+5][w+5];
+        for(int i=0; i<h; i++)
         {
-            for(int j=0)
+            for(int j=0; j<w; j++) cin>>c[i][j];
         }
+        for(int maskh=0; maskh<(1 << h); maskh++)
+        {
+            for(int maskw=0; maskw<(1 << w); maskw++)
+            {
 
+                int cntBlack=0;
+                for(int i=0; i<h; i++)
+                {
+                    for(int j=0; j<w; j++)
+                    {
+                        /// if( ((maskh >> i) & 1)==0 && ((maskw >> j) & 1)==0 && c[i][j]=='#' ){ cntBlack++; }
+                        ///If we right shift n by k-1, we get last bit as 1 if k-th bit is set else 0.
+
+                        if( (maskh & (1<<i))==0 && (maskw & (1<<j))==0 && c[i][j]=='#' ) cntBlack++;
+                        ///Left shift given number 1 by k-1 to create a number that has only set bit as k-th bit.
+                        ///temp = 1 << (k-1)
+                        ///If bitwise AND of n and temp is non-zero,then result is SET else result is NOT SET.
+
+                        }
+                }
+                //cout<<cntBlack<<endl;
+                if(cntBlack==k) ans++;
+            }
+        }
+        cout<<ans<<endl;
     }
     return 0;
 }
-

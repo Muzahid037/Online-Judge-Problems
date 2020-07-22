@@ -110,16 +110,11 @@ int main()
     //cin>>t;
     while(t--)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0)
-        }
-
+        int a[3];
+        cin>>a[0]>>a[1]>>a[2];
+        sort(a,a+3);
+        if(a[0]==5 && a[1]==5 && a[2]==7) cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
     }
     return 0;
 }
-

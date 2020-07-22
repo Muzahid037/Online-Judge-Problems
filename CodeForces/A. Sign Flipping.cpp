@@ -85,13 +85,13 @@ char cpp(char c)
 ///------------Sorting STL----------///
 struct func
 {
-	//this is a sample overloading function for sorting stl
-	bool operator()(pii const &a, pii const &b)
-	{
-		if(a.F==b.F)
-			return (a.S<b.S);
-		return (a.F<b.F);
-	}
+    //this is a sample overloading function for sorting stl
+    bool operator()(pii const &a, pii const &b)
+    {
+        if(a.F==b.F)
+            return (a.S<b.S);
+        return (a.F<b.F);
+    }
 };
 
 ///---CONSTANT---///
@@ -103,23 +103,27 @@ const ll infLL = 9000000000000000000;
 
 int main()
 {
-    Boost();
+    //Boost();
 
     int t;
     t=1;
-    //cin>>t;
+    cin>>t;
     while(t--)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
-        for(int i=0;i<n;i++)
+        int n;
+        cin>>n;
+        int a[n+5];
+        for(int i=0; i<n; i++)
         {
-            for(int j=0)
+            cin>>a[i];
+            if(i%2==1) a[i]=abs(a[i]);
+            else a[i]=abs(a[i])*(-1);
         }
-
+        for(int i=0; i<n; i++)
+        {
+            if(i==n-1) cout<<a[i]<<endl;
+            else cout<<a[i]<<" ";
+        }
     }
     return 0;
 }
-

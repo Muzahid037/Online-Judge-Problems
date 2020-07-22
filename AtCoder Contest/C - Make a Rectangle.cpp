@@ -110,100 +110,113 @@ int main()
     //cin>>t;
     while(t--)
     {
-        int n,cnt4=0,cnt3=0,cnt2=0,cnt1=0;
+        ll n,p,c=0,l=0,r=0;
         cin>>n;
-        vector<int>s(n);
-        for(auto it:s)
+        map<ll,ll>cnt;
+        for(int i=0; i<n; i++)
         {
-            cin>>it;
-            if(it==4) cnt4++;
-            else if(it==3) cnt3++;
-            else if(it==2) cnt2++;
-            else cnt1++;
+            cin>>p;
+            cnt[p]++;
+            if(cnt[p]>1)
+            {
+                if(p>l) l=p;
+                else if(p>r) r=p;
+                if(l>r) swap(l,r);
+                cnt[p]=0;
+            }
         }
-        int ans=cnt4; /// 4
+        cout<<l*r<<endl;
 
-        cnt4=min(cnt3,cnt1); /// 3 1
-        ans+=cnt4;
-        cnt3-=cnt4;
-        cnt1-=cnt4;
 
-        cnt4=cnt2/2;   /// 2 2
-        ans+=cnt4;
-        cnt2=cnt2%2;
+        ///-----sol-----///
 
-        if(cnt2!=0 && cnt1>1) /// 2 1 1
+        /*
+
+        ll n,p;
+        cin>>n;
+        vector<ll>a;
+        map<ll,ll>cnt;
+        for(ll i=0; i<n; i++)
         {
-            ans++;
-            cnt2--;
-            cnt1-=2;
+            cin>>p;
+            cnt[p]++;
+            if(cnt[p]>1)
+            {
+              a.pb(p);
+              cnt[p]=0;
+            }
         }
-        cnt4=cnt1/4; /// 1 1 1 1
-        ans+=cnt4;
-        cnt1=cnt1%4;
+        if(a.size()<2)
+        {
+            cout<<"0"<<endl;
+        }
+        else
+        {
+            sort(a.begin(),a.end(),greater<ll>());
+            cout<<a[0]*a[1]<<endl;
+        }
+        */
 
-        if(cnt3!=0) ans+=cnt3; /// 3/3 3/3 3 3..........
-        if(cnt2!=0 || cnt1!=0) ans++; /// 1/1 1/1 1 1/2 1/2
-        cout<<ans<<endl;
 
+        ///------sol-----///
+
+
+        /*
+        ll n,p;
+        cin>>n;
+        map<ll,ll>cnt;
+        set<ll>x;
+        for(ll i=0; i<n; i++)
+        {
+            cin>>p;
+            cnt[p]++;
+            x.insert(p);
+        }
+        vector<ll>a,b;
+        for(set<ll>::iterator it=x.begin(); it!=x.end(); it++)
+        {
+            ll num=*it;
+            if(cnt[num]>=4)
+            {
+                a.pb(num);
+            }
+            else if(cnt[num]>=2)
+            {
+                b.pb(num);
+            }
+        }
+        sort(a.begin(),a.end());
+        reverse(a.begin(),a.end());
+        sort(b.begin(),b.end());
+        reverse(b.begin(),b.end());
+
+        if(!a.empty() && b.size()>1)
+        {
+            ll ans1=(a[0]*a[0]);
+            ans1=max(ans1,a[0]*b[0]);
+            ans1=max(ans1,a[0]*b[1]);
+            ans1=max(ans1,b[0]*b[1]);
+            cout<<ans1<<endl;
+        }
+        else if(a.empty() && b.size()>1)
+        {
+            cout<<b[0]*b[1]<<endl;
+        }
+        else if(!a.empty() && b.empty())
+        {
+            cout<<a[0]*a[0]<<endl;
+        }
+        else if(!a.empty() && b.size()==1)
+        {
+            ll ans1=(a[0]*a[0]);
+            ans1=max(ans1,a[0]*b[0]);
+            cout<<ans1<<endl;
+        }
+        else
+        {
+            cout<<"0"<<endl;
+        }
+        */
     }
     return 0;
 }
-
-
-/*
-
-#include<bits/stdc++.h>
-using namespace std;
-int main()
-{
-    int n;
-    cin>>n;
-    int x,cnt1=0,cnt2=0,cnt3=0,cnt4=0,tx;
-    for(int i=0; i<n; i++)
-    {
-        cin>>x;
-        if(x==1)
-        {
-            cnt1++;
-        }
-        if(x==2)
-        {
-            cnt2++;
-        }
-        if(x==3)
-        {
-            cnt3++;
-        }
-        if(x==4)
-        {
-            cnt4++;
-        }
-    }
-    tx=cnt4+cnt3+cnt2/2;
-    cnt2%=2;
-    cnt1-=cnt3;
-
-    if(cnt2==1)
-    {
-        tx++;
-        cnt1-=2;
-    }
-    if(cnt1>0)
-    {
-        tx+=cnt1/4;
-        cnt1%=4;
-        if(cnt1!=0)
-        {
-            tx++;
-            cnt1=0;
-        }
-    }
-
-    cout<<tx<<endl;
-
-
-    return 0;
-}
-
-*/

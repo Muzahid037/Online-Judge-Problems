@@ -107,19 +107,26 @@ int main()
 
     int t;
     t=1;
-    //cin>>t;
+    cin>>t;
     while(t--)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
-        for(int i=0;i<n;i++)
+        ll x,y,n;
+        cin>>x>>y>>n;
+        ll md=n%x;
+        if(md==y)
         {
-            for(int j=0)
+           cout<<n<<endl;
         }
-
+        else if(md<y)
+        {
+            ll d=n/x;
+            d--;
+           cout<<(d*x)+y<<endl;
+        }
+        else if(md>y)
+        {
+            cout<<n-(md-y)<<endl;
+        }
     }
     return 0;
 }
-

@@ -110,16 +110,10 @@ int main()
     //cin>>t;
     while(t--)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0)
-        }
-
+      int n;
+      cin>>n;
+      if(n%1000==0) cout<<0<<endl;
+      else cout<<1000-(n%1000)<<endl;
     }
     return 0;
 }
-

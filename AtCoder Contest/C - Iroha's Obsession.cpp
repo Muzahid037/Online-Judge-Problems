@@ -1,3 +1,4 @@
+
 ///-----Bismillahir Rahmanir Rahim-----///
 
 #include<bits/stdc++.h>
@@ -85,13 +86,13 @@ char cpp(char c)
 ///------------Sorting STL----------///
 struct func
 {
-	//this is a sample overloading function for sorting stl
-	bool operator()(pii const &a, pii const &b)
-	{
-		if(a.F==b.F)
-			return (a.S<b.S);
-		return (a.F<b.F);
-	}
+    //this is a sample overloading function for sorting stl
+    bool operator()(pii const &a, pii const &b)
+    {
+        if(a.F==b.F)
+            return (a.S<b.S);
+        return (a.F<b.F);
+    }
 };
 
 ///---CONSTANT---///
@@ -101,6 +102,7 @@ const int inf = 2000000000;
 const ll infLL = 9000000000000000000;
 #define MOD 1000000007
 
+int dis[10];
 int main()
 {
     Boost();
@@ -110,16 +112,34 @@ int main()
     //cin>>t;
     while(t--)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
-        for(int i=0;i<n;i++)
+        int n,k,x,ans;
+        cin>>n>>k;
+        for(int i=0; i<k; i++)
         {
-            for(int j=0)
+            cin>>x;
+            dis[x]=1;
         }
-
+        for(int i=n; i<=100000; i++)
+        {
+            int tmp=i,flag=0;
+            while(tmp>0)
+            {
+                int d=tmp%10;
+                if(dis[d]==1)
+                {
+                    flag=1;
+                    break;
+                }
+                tmp/=10;
+            }
+            //cout<<flag<<" "<<i<<endl;
+            if(flag==0)
+            {
+                ans=i;
+                break;
+            }
+        }
+        cout<<ans<<endl;
     }
     return 0;
 }
-

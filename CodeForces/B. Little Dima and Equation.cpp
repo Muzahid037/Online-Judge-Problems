@@ -85,13 +85,13 @@ char cpp(char c)
 ///------------Sorting STL----------///
 struct func
 {
-	//this is a sample overloading function for sorting stl
-	bool operator()(pii const &a, pii const &b)
-	{
-		if(a.F==b.F)
-			return (a.S<b.S);
-		return (a.F<b.F);
-	}
+    //this is a sample overloading function for sorting stl
+    bool operator()(pii const &a, pii const &b)
+    {
+        if(a.F==b.F)
+            return (a.S<b.S);
+        return (a.F<b.F);
+    }
 };
 
 ///---CONSTANT---///
@@ -101,25 +101,47 @@ const int inf = 2000000000;
 const ll infLL = 9000000000000000000;
 #define MOD 1000000007
 
-int main()
+ll S(ll x)
 {
-    Boost();
-
-    int t;
-    t=1;
-    //cin>>t;
-    while(t--)
+    //if (x < 0)return -1;
+    ll s = 0;
+    while(x!=0LL)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0)
-        }
-
+        s += x%10;
+        x /= 10;
     }
-    return 0;
+    return s;
+}
+ll poW(ll a, ll b)
+{
+    ll res = 1;
+    for(int i = 1; i<=b; ++i)
+    {
+        res *= a;
+    }
+    return res;
 }
 
+int main()
+{
+    ll a, b, c;
+    cin >> a >> b >> c;
+    vector<ll>ans;
+    for(ll s = 1; s <= 81LL; ++s)
+    {
+        ll x = b*poW(s, a) + c;
+        if (S(x) == s && x < 1000000000)
+        {
+            ans.push_back(x);
+        }
+    }
+    ll n=ans.size();
+    cout << n << endl;
+    for(int i = 0; i<n; ++i)
+    {
+        cout << ans[i] << " ";
+    }
+    cout<<endl;
+
+    return 0;
+}

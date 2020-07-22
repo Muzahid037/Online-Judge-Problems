@@ -110,16 +110,14 @@ int main()
     //cin>>t;
     while(t--)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0)
-        }
+        int l,r,d,cnt=0;
+        cin>>l>>r>>d;
+        int st=ceil((1.0*l)/(1.0*d));
+        st=st*d;
+        //cout<<st<<endl;
+        for(int i=st;i<=r;i+=d) cnt++;
+        cout<<cnt<<endl;
 
     }
     return 0;
 }
-

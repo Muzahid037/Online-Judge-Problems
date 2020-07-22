@@ -1,4 +1,6 @@
 ///-----Bismillahir Rahmanir Rahim-----///
+///not accepted
+
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -85,13 +87,13 @@ char cpp(char c)
 ///------------Sorting STL----------///
 struct func
 {
-	//this is a sample overloading function for sorting stl
-	bool operator()(pii const &a, pii const &b)
-	{
-		if(a.F==b.F)
-			return (a.S<b.S);
-		return (a.F<b.F);
-	}
+    //this is a sample overloading function for sorting stl
+    bool operator()(pii const &a, pii const &b)
+    {
+        if(a.F==b.F)
+            return (a.S<b.S);
+        return (a.F<b.F);
+    }
 };
 
 ///---CONSTANT---///
@@ -107,19 +109,14 @@ int main()
 
     int t;
     t=1;
-    //cin>>t;
+    cin>>t;
     while(t--)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0)
-        }
-
+        ll n;
+        cin>>n;
+        if(n==1) cout<<"1"<<endl;
+//        else if(n%2==0 && n%3==0) cout<<"3"<<endl;
+        else cout<<"2"<<endl;
     }
     return 0;
 }
-

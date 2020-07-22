@@ -103,23 +103,24 @@ const ll infLL = 9000000000000000000;
 
 int main()
 {
-    Boost();
+    ///Boost();
 
     int t;
     t=1;
-    //cin>>t;
+    cin>>t;
     while(t--)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
+        int n;
+        ll ans=0;
+        cin>>n;
+        int s[n+5];
         for(int i=0;i<n;i++)
         {
-            for(int j=0)
+            cin>>s[i];
+            if(i==0) continue;
+            ans+=(abs(s[i]-s[i-1])-1);
         }
-
+      cout<<ans<<endl;
     }
     return 0;
 }
-

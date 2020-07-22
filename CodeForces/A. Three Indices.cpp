@@ -85,13 +85,13 @@ char cpp(char c)
 ///------------Sorting STL----------///
 struct func
 {
-	//this is a sample overloading function for sorting stl
-	bool operator()(pii const &a, pii const &b)
-	{
-		if(a.F==b.F)
-			return (a.S<b.S);
-		return (a.F<b.F);
-	}
+    //this is a sample overloading function for sorting stl
+    bool operator()(pii const &a, pii const &b)
+    {
+        if(a.F==b.F)
+            return (a.S<b.S);
+        return (a.F<b.F);
+    }
 };
 
 ///---CONSTANT---///
@@ -107,19 +107,31 @@ int main()
 
     int t;
     t=1;
-    //cin>>t;
+    cin>>t;
     while(t--)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
-        for(int i=0;i<n;i++)
+        int n,mn,mx,left=0,mid=0,right=0;
+        cin>>n;
+        int p[n+5];
+        for(int i=1; i<=n; i++)
         {
-            for(int j=0)
+            cin>>p[i];
         }
-
+        for(int i=1; i<=n-2; i++)
+        {
+            if(p[i]<p[i+1] && p[i+1]>p[i+2])
+            {
+                left=i;
+                mid=i+1;
+                right=i+2;
+                break;
+            }
+        }
+        if(left==0) cout<<"NO"<<endl;
+        else
+        {
+            cout<<"YES"<<endl<<left<<" "<<mid<<" "<<right<<endl;
+        }
     }
     return 0;
 }
-

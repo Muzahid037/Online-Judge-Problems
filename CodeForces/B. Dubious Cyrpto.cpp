@@ -85,13 +85,13 @@ char cpp(char c)
 ///------------Sorting STL----------///
 struct func
 {
-	//this is a sample overloading function for sorting stl
-	bool operator()(pii const &a, pii const &b)
-	{
-		if(a.F==b.F)
-			return (a.S<b.S);
-		return (a.F<b.F);
-	}
+    //this is a sample overloading function for sorting stl
+    bool operator()(pii const &a, pii const &b)
+    {
+        if(a.F==b.F)
+            return (a.S<b.S);
+        return (a.F<b.F);
+    }
 };
 
 ///---CONSTANT---///
@@ -107,19 +107,42 @@ int main()
 
     int t;
     t=1;
-    //cin>>t;
+    cin>>t;
     while(t--)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
-        for(int i=0;i<n;i++)
+        ll l,r,m,range,a,b,c;
+        cin>>l>>r>>m;
+        range=r-l;
+        for(ll i=l; i<=r; i++)
         {
-            for(int j=0)
+            ll low=floor((m*1.0)/(i*1.0));
+            low*=i;
+            ll lowDiff=m-low;
+            ll high=ceil((m*1.0)/(i*1.0));
+            high*=i;
+            ll highDiff=high-m;
+            if(lowDiff<=range)
+            {
+                a=i;
+                b=l+lowDiff;
+                c=l;
+                if(((m+c-b)/a)>0)
+                {
+                    break;
+                }
+            }
+            if(highDiff<=range )
+            {
+                a=i;
+                b=r-highDiff;
+                c=r;
+                if(((m+c-b)/a)>0)
+                {
+                    break;
+                }
+            }
         }
-
+        cout<<a<<" "<<b<<" "<<c<<endl;
     }
     return 0;
 }
-

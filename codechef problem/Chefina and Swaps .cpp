@@ -85,13 +85,13 @@ char cpp(char c)
 ///------------Sorting STL----------///
 struct func
 {
-	//this is a sample overloading function for sorting stl
-	bool operator()(pii const &a, pii const &b)
-	{
-		if(a.F==b.F)
-			return (a.S<b.S);
-		return (a.F<b.F);
-	}
+    //this is a sample overloading function for sorting stl
+    bool operator()(pii const &a, pii const &b)
+    {
+        if(a.F==b.F)
+            return (a.S<b.S);
+        return (a.F<b.F);
+    }
 };
 
 ///---CONSTANT---///
@@ -107,19 +107,72 @@ int main()
 
     int t;
     t=1;
-    //cin>>t;
+    cin>>t;
     while(t--)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
-        for(int i=0;i<n;i++)
+        ll n,x;
+        cin>>n;
+        vector<ll>a,b;
+        for(ll i=0; i<n; i++)
         {
-            for(int j=0)
+            cin>>x;
+            a.pb(x);
+        }
+        for(ll i=0; i<n; i++)
+        {
+            cin>>x;
+            b.pb(x);
+        }
+        sort(a.begin(),a.end());
+        sort(b.begin(),b.end());
+        ll idx=0;
+        while(a[idx]==b[idx] && idx<n) idx++;
+        vector<ll>a1st,a2nd,b1st,b2nd,r;
+        for(ll i=idx,j=0; i<n; i++,j++)
+        {
+            if(j%2==0)
+            {
+                a1st.pb(a[i]);
+                b1st.pb(b[i]);
+                r.pb(a[i]);
+                r.pb(a[i]);
+                r.pb(b[i]);
+            }
+            else
+            {
+                a2nd.pb(a[i]);
+                b2nd.pb(b[i]);
+                //r.pb(min(a[i],b[i]));
+            }
+        }
+        ll a1stSz=a1st.size();
+        ll a2ndSz=a2nd.size();
+        ll b1stSz=b1st.size();
+        ll b2ndSz=b2nd.size();
+        if(a1stSz==a2ndSz && b1stSz==b2ndSz && a1st==a2nd &&  b1st==b2nd)
+        {
+            ll cost=0;
+            sort(r.begin(),r.end());
+            for(ll i=0; i<a1stSz; i++) cost+=r[i];
+            cout<<cost<<endl;
+        }
+        else
+        {
+            cout<<"-1"<<endl;
         }
 
+
+//        ll diff=n-idx;
+//        sort(p.begin(),p.end());
+//        sort(q.begin(),q.end());
+//        if(p!=q || diff%2==1) cout<<"-1"<<endl;
+//        else
+//        {
+//            ll cost=0;
+//            sort(r.begin(),r.end());
+//            for(ll i=0; i<diff/2; i++) cost+=r[i];
+//            cout<<cost<<endl;
+//        }
     }
     return 0;
 }
-

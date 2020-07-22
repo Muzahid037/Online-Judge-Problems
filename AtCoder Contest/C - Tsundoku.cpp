@@ -85,13 +85,13 @@ char cpp(char c)
 ///------------Sorting STL----------///
 struct func
 {
-	//this is a sample overloading function for sorting stl
-	bool operator()(pii const &a, pii const &b)
-	{
-		if(a.F==b.F)
-			return (a.S<b.S);
-		return (a.F<b.F);
-	}
+    //this is a sample overloading function for sorting stl
+    bool operator()(pii const &a, pii const &b)
+    {
+        if(a.F==b.F)
+            return (a.S<b.S);
+        return (a.F<b.F);
+    }
 };
 
 ///---CONSTANT---///
@@ -110,16 +110,31 @@ int main()
     //cin>>t;
     while(t--)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
-        for(int i=0;i<n;i++)
+        ll n,m,k,x,ans=0;
+        cin>>n>>m>>k;
+        vector<ll>a(n+1,0);
+        for(ll i=1; i<=n; i++)
         {
-            for(int j=0)
+            cin>>a[i];
+            a[i]+=a[i-1];
         }
-
+        vector<ll>b(m+1,0);
+        for(ll i=1; i<=m; i++)
+        {
+            cin>>b[i];
+            b[i]+=b[i-1];
+        }
+        for(ll i=0; i<=n; i++)
+        {
+            if(a[i]>k) break;
+            ll baki=k-a[i];
+            ll lb=upper_bound(b.begin(),b.end(),baki)-b.begin();
+            lb--;
+            //cout<<" baki: "<<baki<<"lb: "<<lb<<endl;
+            ans=max(ans,i+lb);
+            //cout<<ans<<endl;
+        }
+        cout<<ans<<endl;
     }
     return 0;
 }
-

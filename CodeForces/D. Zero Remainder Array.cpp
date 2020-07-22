@@ -85,13 +85,13 @@ char cpp(char c)
 ///------------Sorting STL----------///
 struct func
 {
-	//this is a sample overloading function for sorting stl
-	bool operator()(pii const &a, pii const &b)
-	{
-		if(a.F==b.F)
-			return (a.S<b.S);
-		return (a.F<b.F);
-	}
+    //this is a sample overloading function for sorting stl
+    bool operator()(pii const &a, pii const &b)
+    {
+        if(a.F==b.F)
+            return (a.S<b.S);
+        return (a.F<b.F);
+    }
 };
 
 ///---CONSTANT---///
@@ -107,19 +107,65 @@ int main()
 
     int t;
     t=1;
-    //cin>>t;
+    cin>>t;
     while(t--)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
-        for(int i=0;i<n;i++)
+        ll n,k,x,ans=-1;
+        cin>>n>>k;
+        map<ll,ll>cnt;
+        for(ll i=0; i<n; i++)
         {
-            for(int j=0)
+            cin>>x;
+            if(x<k)
+            {
+                if(cnt[k-x]==0) cnt[k-x]=(k-x);
+                else cnt[k-x]+=k;
+                ans=max(ans,cnt[k-x]);
+            }
+            else if(x>k && x%k!=0)
+            {
+                ll nextkDivisable=(x-(x%k))+k;
+                ll extra=nextkDivisable-x;
+                if(cnt[extra]==0) cnt[extra]=extra;
+                else cnt[extra]+=k;
+                ans=max(ans,cnt[extra]);
+            }
         }
+        cout<<ans+1<<endl;
 
+
+
+        ///----another sol---///
+        /*
+
+        ll n,k,x;
+        cin>>n>>k;
+        vector<ll>a;
+        map<ll,ll>cnt;
+        for(ll i=0; i<n; i++)
+        {
+            cin>>x;
+            if(x<k)
+            {
+                if(cnt[k-x]==0) cnt[k-x]=(k-x);
+                else cnt[k-x]+=k;
+                a.pb(cnt[k-x]);
+            }
+            else if(x>k && x%k!=0)
+            {
+                ll tmp=x/k;
+                ll all=(tmp*k)+k;
+                ll ex=all-x;
+                if(cnt[ex]==0) cnt[ex]=ex;
+                else cnt[ex]+=k;
+                a.pb(cnt[ex]);
+            }
+        }
+        sort(a.begin(),a.end());
+        if(a.empty()) cout<<"0"<<endl;
+        else cout<<a[a.size()-1]+1<<endl;
+
+            */
     }
     return 0;
 }
-

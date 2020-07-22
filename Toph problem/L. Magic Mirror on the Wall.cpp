@@ -107,19 +107,28 @@ int main()
 
     int t;
     t=1;
-    //cin>>t;
+    cin>>t;
     while(t--)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
-        for(int i=0;i<n;i++)
+        long double x1,y1,x2,y2,y=0.0;
+        cin>>x1>>y1>>x2>>y2;
+        if(x1<x2)
         {
-            for(int j=0)
+            long double a=(y1/y2);
+            long double pq=x2-x1;
+            long double p=((a*pq)/(1+a));
+            p+=x1;
+            cout<<fixed<<setprecision(16)<<p<<" "<<y<<endl;
         }
+        else
+        {
+            long double a=(y2/y1);
+            long double pq=x1-x2;
+            long double p=((a*pq)/(1+a));
+            p+=x2;
+            cout<<fixed<<setprecision(16)<<p<<" "<<y<<endl;
 
+        }
     }
     return 0;
 }
-

@@ -85,13 +85,13 @@ char cpp(char c)
 ///------------Sorting STL----------///
 struct func
 {
-	//this is a sample overloading function for sorting stl
-	bool operator()(pii const &a, pii const &b)
-	{
-		if(a.F==b.F)
-			return (a.S<b.S);
-		return (a.F<b.F);
-	}
+    //this is a sample overloading function for sorting stl
+    bool operator()(pii const &a, pii const &b)
+    {
+        if(a.F==b.F)
+            return (a.S<b.S);
+        return (a.F<b.F);
+    }
 };
 
 ///---CONSTANT---///
@@ -110,16 +110,91 @@ int main()
     //cin>>t;
     while(t--)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
-        for(int i=0;i<n;i++)
+
+        ll n,l,x;
+        cin>>n>>l;
+        vector<ll>a;
+        for(ll i=0; i<n; i++)
         {
-            for(int j=0)
+            cin>>x;
+            a.pb(x);
+        }
+        ll idx=-1;
+        for(ll i=0; i<n-1; i++)
+        {
+            if(a[i]+a[i+1]>=l)
+            {
+                idx=i+1;
+                break;
+            }
+        }
+        if(idx==-1)
+        {
+            cout<<"Impossible"<<endl;
+        }
+        else
+        {
+            cout<<"Possible"<<endl;
+            for(ll i=1; i<=(idx-1); i++)
+            {
+                cout<<i<<endl;
+            }
+            for(ll i=n-1; i>=idx; i--)
+            {
+                cout<<i<<endl;
+            }
         }
 
+        /*
+
+        ll n,l,x;
+        cin>>n>>l;
+        vector<ll>a;
+        for(ll i=0; i<n; i++)
+        {
+            cin>>x;
+            a.pb(x);
+        }
+        if(n==2)
+        {
+            if(a[0]+a[1]>=l)
+            {
+                cout<<"Possible"<<endl<<"1"<<endl;
+            }
+            else
+            {
+                cout<<"Impossible"<<endl;
+            }
+            return 0;
+        }
+        ll flag1=-1;
+        for(ll i=0; i<n-1; i++)
+        {
+            if(a[i]+a[i+1]>=l)
+            {
+                //ans1.pb(i+1);
+                flag1=i+1;
+                break;
+            }
+        }
+        if(flag1!=-1)
+        {
+            cout<<"Possible"<<endl;
+            for(ll i=1; i<flag1; i++)
+            {
+                cout<<i<<endl;
+            }
+            for(ll i=n-1; i>=flag1; i--)
+            {
+                cout<<i<<endl;
+            }
+        }
+        else
+        {
+            cout<<"Impossible"<<endl;
+        }
+
+        */
     }
     return 0;
 }
-

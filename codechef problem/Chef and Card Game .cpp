@@ -107,19 +107,35 @@ int main()
 
     int t;
     t=1;
-    //cin>>t;
+    cin>>t;
     while(t--)
     {
-        ll n,a;
-        cin>>n>>a;
-        vector<ll>x(n);
-        for(ll i=0;i<n;i++) cin>>x[i];
+        int n,cf,mr,cf0=0,mr1=0;
+        cin>>n;
         for(int i=0;i<n;i++)
         {
-            for(int j=0)
+            cin>>cf>>mr;
+            int cfCard=0,mrCard=0;
+            while(cf!=0)
+            {
+                cfCard+=(cf%10);
+                cf/=10;
+            }
+            while(mr!=0)
+            {
+                mrCard+=(mr%10);
+                mr/=10;
+            }
+            if(cfCard==mrCard) {
+                cf0++;
+                mr1++;
+            }
+            else if(cfCard>mrCard) cf0++;
+            else mr1++;
         }
-
+        if(cf0==mr1) cout<<"2 "<<mr1<<endl;
+        else if(cf0<mr1) cout<<"1 "<<mr1<<endl;
+        else cout<<"0 "<<cf0<<endl;
     }
     return 0;
 }
-
