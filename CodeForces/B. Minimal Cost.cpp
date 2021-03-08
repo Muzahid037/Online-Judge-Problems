@@ -1,3 +1,4 @@
+
 ///"--------------------Bismillahir Rahmanir Rahim"-----------------------///
 
 #include<bits/stdc++.h>
@@ -139,85 +140,33 @@ void sieve()
     }
 }
 ///-------------------------------------------------------------------------------///
-vector<int>lagbe[100005];  ///index of b[i] where b[i]!=a[i]
 
 void solve()
 {
-    int n,m;
-    cin>>n>>m;
-
-    for(int i=0; i<=n; i++)
-    {
-        lagbe[i].clear();
-    }
-
-    vector<int>a(n),b(n),c(m);
-    for(int i=0; i<n; i++)
+	ll n,u,v;
+	cin>>n>>u>>v;
+	vector<ll>a(n);
+	ll ans=infLL;
+	for(ll i=0;i<n;i++)
     {
         cin>>a[i];
-    }
-    for(int i=0; i<n; i++)
-    {
-        cin>>b[i];
-        if(a[i]!=b[i])
+        if(i>0)
         {
-            lagbe[b[i]].pb(i);
-        }
-    }
-    for(int i=0; i<m; i++)
-    {
-        cin>>c[i];
-    }
-    int lastPainterColorIndexInBi=-1;
-    if(lagbe[c[m-1]].size()>0)  ///check where a[i]!=b[i]
-    {
-        lastPainterColorIndexInBi=lagbe[c[m-1]].back();
-        lagbe[c[m-1]].pop_back();
-    }
-    else
-    {
-        for(int i=0; i<n; i++) ///check all b[i]
-        {
-            if(b[i]==c[m-1])
+            if(abs(a[i-1]-a[i])>1)
             {
-                lastPainterColorIndexInBi=i;
-                break;
+                ans=0;
+            }
+            else if(abs(a[i-1]-a[i])==1)
+            {
+                ans=min(ans,min(u,v));
+            }
+            else
+            {
+                ans=min(ans,v+min(u,v));
             }
         }
     }
-    if(lastPainterColorIndexInBi==-1)
-    {
-        cout<<"NO"<<endl;
-        return;
-    }
-    int ans[m];
-    ans[m-1]=lastPainterColorIndexInBi;
-    for(int i=0; i<m-1; i++)
-    {
-        if(lagbe[c[i]].size()>0)
-        {
-            ans[i]=lagbe[c[i]].back();
-            lagbe[c[i]].pop_back();
-        }
-        else
-        {
-            ans[i]=lastPainterColorIndexInBi;
-        }
-    }
-    for(int i=0; i<n; i++)
-    {
-        if( lagbe[b[i]].size()>0)
-        {
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    cout<<"YES"<<endl;
-    for(int i=0; i<m; i++)
-    {
-        cout<<ans[i]+1<<" ";
-    }
-    cout<<endl;
+    cout<<ans<<endl;
 }
 int main()
 {

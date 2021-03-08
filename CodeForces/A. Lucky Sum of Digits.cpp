@@ -139,85 +139,29 @@ void sieve()
     }
 }
 ///-------------------------------------------------------------------------------///
-vector<int>lagbe[100005];  ///index of b[i] where b[i]!=a[i]
 
 void solve()
 {
-    int n,m;
-    cin>>n>>m;
-
-    for(int i=0; i<=n; i++)
+    int n;
+    cin>>n;
+    for(int i=0;i<=n;i++)
     {
-        lagbe[i].clear();
-    }
-
-    vector<int>a(n),b(n),c(m);
-    for(int i=0; i<n; i++)
-    {
-        cin>>a[i];
-    }
-    for(int i=0; i<n; i++)
-    {
-        cin>>b[i];
-        if(a[i]!=b[i])
+        //cout<<n-(i*4)<<endl;
+        if((n-(i*4))>=0 && (n-(i*4))%7==0)
         {
-            lagbe[b[i]].pb(i);
-        }
-    }
-    for(int i=0; i<m; i++)
-    {
-        cin>>c[i];
-    }
-    int lastPainterColorIndexInBi=-1;
-    if(lagbe[c[m-1]].size()>0)  ///check where a[i]!=b[i]
-    {
-        lastPainterColorIndexInBi=lagbe[c[m-1]].back();
-        lagbe[c[m-1]].pop_back();
-    }
-    else
-    {
-        for(int i=0; i<n; i++) ///check all b[i]
-        {
-            if(b[i]==c[m-1])
+            for(int j=0;j<i;j++)
             {
-                lastPainterColorIndexInBi=i;
-                break;
+                cout<<"4";
             }
-        }
-    }
-    if(lastPainterColorIndexInBi==-1)
-    {
-        cout<<"NO"<<endl;
-        return;
-    }
-    int ans[m];
-    ans[m-1]=lastPainterColorIndexInBi;
-    for(int i=0; i<m-1; i++)
-    {
-        if(lagbe[c[i]].size()>0)
-        {
-            ans[i]=lagbe[c[i]].back();
-            lagbe[c[i]].pop_back();
-        }
-        else
-        {
-            ans[i]=lastPainterColorIndexInBi;
-        }
-    }
-    for(int i=0; i<n; i++)
-    {
-        if( lagbe[b[i]].size()>0)
-        {
-            cout<<"NO"<<endl;
+            for(int j=0;j<(n-(i*4))/7;j++)
+            {
+                cout<<"7";
+            }
+            cout<<endl;
             return;
         }
     }
-    cout<<"YES"<<endl;
-    for(int i=0; i<m; i++)
-    {
-        cout<<ans[i]+1<<" ";
-    }
-    cout<<endl;
+    cout<<"-1"<<endl;
 }
 int main()
 {
@@ -225,7 +169,7 @@ int main()
 
     int t;
     t=1;
-    cin>>t;
+    //cin>>t;
     while(t--) solve();
     return 0;
 }

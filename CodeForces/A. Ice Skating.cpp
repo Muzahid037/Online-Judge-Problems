@@ -139,85 +139,35 @@ void sieve()
     }
 }
 ///-------------------------------------------------------------------------------///
-vector<int>lagbe[100005];  ///index of b[i] where b[i]!=a[i]
+int vis[105],x[105],y[105],n,notConnectGraph;
 
+void dfs(int p)
+{
+    vis[p]=1;
+    for(int i=0;i<n;i++)
+    {
+        if(!vis[i] && (x[p]==x[i] || y[p]==y[i]))
+        {
+            dfs(i);
+        }
+    }
+}
 void solve()
 {
-    int n,m;
-    cin>>n>>m;
-
-    for(int i=0; i<=n; i++)
+	cin>>n;
+	for(int i=0;i<n;i++)
     {
-        lagbe[i].clear();
+        cin>>x[i]>>y[i];
     }
-
-    vector<int>a(n),b(n),c(m);
-    for(int i=0; i<n; i++)
+    for(int i=0;i<n;i++)
     {
-        cin>>a[i];
-    }
-    for(int i=0; i<n; i++)
-    {
-        cin>>b[i];
-        if(a[i]!=b[i])
+        if(!vis[i])
         {
-            lagbe[b[i]].pb(i);
+            notConnectGraph++;
+            dfs(i);
         }
     }
-    for(int i=0; i<m; i++)
-    {
-        cin>>c[i];
-    }
-    int lastPainterColorIndexInBi=-1;
-    if(lagbe[c[m-1]].size()>0)  ///check where a[i]!=b[i]
-    {
-        lastPainterColorIndexInBi=lagbe[c[m-1]].back();
-        lagbe[c[m-1]].pop_back();
-    }
-    else
-    {
-        for(int i=0; i<n; i++) ///check all b[i]
-        {
-            if(b[i]==c[m-1])
-            {
-                lastPainterColorIndexInBi=i;
-                break;
-            }
-        }
-    }
-    if(lastPainterColorIndexInBi==-1)
-    {
-        cout<<"NO"<<endl;
-        return;
-    }
-    int ans[m];
-    ans[m-1]=lastPainterColorIndexInBi;
-    for(int i=0; i<m-1; i++)
-    {
-        if(lagbe[c[i]].size()>0)
-        {
-            ans[i]=lagbe[c[i]].back();
-            lagbe[c[i]].pop_back();
-        }
-        else
-        {
-            ans[i]=lastPainterColorIndexInBi;
-        }
-    }
-    for(int i=0; i<n; i++)
-    {
-        if( lagbe[b[i]].size()>0)
-        {
-            cout<<"NO"<<endl;
-            return;
-        }
-    }
-    cout<<"YES"<<endl;
-    for(int i=0; i<m; i++)
-    {
-        cout<<ans[i]+1<<" ";
-    }
-    cout<<endl;
+    cout<<notConnectGraph-1<<endl;
 }
 int main()
 {
@@ -225,7 +175,7 @@ int main()
 
     int t;
     t=1;
-    cin>>t;
+    //cin>>t;
     while(t--) solve();
     return 0;
 }

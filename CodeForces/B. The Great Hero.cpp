@@ -139,85 +139,41 @@ void sieve()
     }
 }
 ///-------------------------------------------------------------------------------///
-vector<int>lagbe[100005];  ///index of b[i] where b[i]!=a[i]
-
+bool cmp(pair<int,int>p1,pair<int, int>p2)
+{
+    if(p1.first==p2.first)
+    {
+        return p1.second>p2.second;
+    }
+    else return p1.first>p2.first;
+}
 void solve()
 {
-    int n,m;
-    cin>>n>>m;
-
-    for(int i=0; i<=n; i++)
+    ll ah,hh,n;
+    cin>>ah>>hh>>n;
+    pair<int,int>mons[n];
+    for(ll i=0; i<n; i++) cin>>mons[i].first; ///attack
+    for(ll i=0; i<n; i++) cin>>mons[i].second;  ///health
+    //sort(mons,mons+n,cmp);
+    ll isaLive=hh;
+    for(ll i=0; i<n; i++)
     {
-        lagbe[i].clear();
+        //cout<<mons[i].first<<" "<<mons[i].second<<endl;
+        ll noOfFightToKillMons=ceil((mons[i].second*1.0)/(ah*1.0));
+        //cout<<noOfFightToKillMons<<endl;
+        isaLive-=(noOfFightToKillMons*mons[i].first);
     }
-
-    vector<int>a(n),b(n),c(m);
-    for(int i=0; i<n; i++)
+    //cout<<isaLive<<endl;
+    for(ll i=0; i<n; i++)
     {
-        cin>>a[i];
-    }
-    for(int i=0; i<n; i++)
-    {
-        cin>>b[i];
-        if(a[i]!=b[i])
+        if(isaLive+mons[i].first>0)
         {
-            lagbe[b[i]].pb(i);
-        }
-    }
-    for(int i=0; i<m; i++)
-    {
-        cin>>c[i];
-    }
-    int lastPainterColorIndexInBi=-1;
-    if(lagbe[c[m-1]].size()>0)  ///check where a[i]!=b[i]
-    {
-        lastPainterColorIndexInBi=lagbe[c[m-1]].back();
-        lagbe[c[m-1]].pop_back();
-    }
-    else
-    {
-        for(int i=0; i<n; i++) ///check all b[i]
-        {
-            if(b[i]==c[m-1])
-            {
-                lastPainterColorIndexInBi=i;
-                break;
-            }
-        }
-    }
-    if(lastPainterColorIndexInBi==-1)
-    {
-        cout<<"NO"<<endl;
-        return;
-    }
-    int ans[m];
-    ans[m-1]=lastPainterColorIndexInBi;
-    for(int i=0; i<m-1; i++)
-    {
-        if(lagbe[c[i]].size()>0)
-        {
-            ans[i]=lagbe[c[i]].back();
-            lagbe[c[i]].pop_back();
-        }
-        else
-        {
-            ans[i]=lastPainterColorIndexInBi;
-        }
-    }
-    for(int i=0; i<n; i++)
-    {
-        if( lagbe[b[i]].size()>0)
-        {
-            cout<<"NO"<<endl;
+            cout<<"YES"<<endl;
             return;
         }
     }
-    cout<<"YES"<<endl;
-    for(int i=0; i<m; i++)
-    {
-        cout<<ans[i]+1<<" ";
-    }
-    cout<<endl;
+    cout<<"NO"<<endl;
+
 }
 int main()
 {

@@ -139,85 +139,52 @@ void sieve()
     }
 }
 ///-------------------------------------------------------------------------------///
-vector<int>lagbe[100005];  ///index of b[i] where b[i]!=a[i]
 
 void solve()
 {
-    int n,m;
-    cin>>n>>m;
+    int n;
+    cin>>n;
+    vector<int>v(4),c(4,n);
+    cin>>v[0]>>v[1]>>v[2]>>v[3];
 
-    for(int i=0; i<=n; i++)
+    for(int i=0; i<4; i++)
     {
-        lagbe[i].clear();
-    }
-
-    vector<int>a(n),b(n),c(m);
-    for(int i=0; i<n; i++)
-    {
-        cin>>a[i];
-    }
-    for(int i=0; i<n; i++)
-    {
-        cin>>b[i];
-        if(a[i]!=b[i])
-        {
-            lagbe[b[i]].pb(i);
-        }
-    }
-    for(int i=0; i<m; i++)
-    {
-        cin>>c[i];
-    }
-    int lastPainterColorIndexInBi=-1;
-    if(lagbe[c[m-1]].size()>0)  ///check where a[i]!=b[i]
-    {
-        lastPainterColorIndexInBi=lagbe[c[m-1]].back();
-        lagbe[c[m-1]].pop_back();
-    }
-    else
-    {
-        for(int i=0; i<n; i++) ///check all b[i]
-        {
-            if(b[i]==c[m-1])
-            {
-                lastPainterColorIndexInBi=i;
-                break;
-            }
-        }
-    }
-    if(lastPainterColorIndexInBi==-1)
-    {
-        cout<<"NO"<<endl;
-        return;
-    }
-    int ans[m];
-    ans[m-1]=lastPainterColorIndexInBi;
-    for(int i=0; i<m-1; i++)
-    {
-        if(lagbe[c[i]].size()>0)
-        {
-            ans[i]=lagbe[c[i]].back();
-            lagbe[c[i]].pop_back();
-        }
-        else
-        {
-            ans[i]=lastPainterColorIndexInBi;
-        }
-    }
-    for(int i=0; i<n; i++)
-    {
-        if( lagbe[b[i]].size()>0)
+        //cout<<v[i]<<" ";
+        if((v[i]-(n-2))>2)
         {
             cout<<"NO"<<endl;
             return;
         }
+        if((v[i]-(n-2))>=0)
+        {
+            v[i]=(v[i]-(n-2));
+        }
     }
-    cout<<"YES"<<endl;
-    for(int i=0; i<m; i++)
+    for(int i=0; i<4; i++)
     {
-        cout<<ans[i]+1<<" ";
+        //cout<<v[i]<<" ";
+        c[i]-=v[i];
     }
-    cout<<endl;
+
+    if(v[0]==2)
+    {
+        v[0]-=2;
+        v[1]--;
+        v[3]--;
+    }
+    if(v[1]==2)
+    {
+        v[1]-=2;
+        v[0]--;
+        v[2]--;
+    }
+    if(v[2]==2)
+    {
+        v[2]-=2;
+        v[1]--;
+        v[3]--;
+    }
+
 }
 int main()
 {
