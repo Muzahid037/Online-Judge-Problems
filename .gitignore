@@ -1,3 +1,6 @@
+*.txt
+*.vscode
+*.cph
+*.o
+*.exe
 
-CodeForces/output.txt
-CodeForces/output.txt
