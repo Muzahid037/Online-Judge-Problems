@@ -115,6 +115,40 @@ const ll infLL = 9000000000000000000;
 #define MOD 1000000007
 ///-----------------------------------------------------------------------///
 
+void solve()
+{
+    int d, e, f = 0;
+    vector<int> x(3);
+    cin >> x[0] >> x[1] >> x[2]>>d>>e;
+    sort(x.begin(), x.end(), greater<int>());
+
+    for (int i = 0; i < x.size(); i++)
+    {
+        //cout << x[i] << " " << endl;
+        if (e >= x[i])
+        {
+            x[i] = 0;
+            f = 1;
+            break;
+        }
+    }
+    if(f==0){
+        cout<<"NO"<<endl;
+        return;
+    }
+    for (int i = 0; i < x.size(); i++)
+    {
+        d -= x[i];
+    }
+    if(d<0)
+    {
+       cout<<"NO"<<endl; 
+    }
+    else
+    {
+        cout<<"YES"<<endl;
+    }
+}
 int main()
 {
     Boost();
@@ -126,27 +160,8 @@ int main()
 
     int t;
     t = 1;
-    // cin >> t;
-    int edge, vert;
-    cin >> vert >> edge;
-
-    vector<int> adj[10];
-
-    string pr;
-    for (int i = 0; i < 10; i++)
-    {
-        cin >> pr;
-        adj[1].push_back(2);
-    }
-
-   
-        for (int i = 0; i < adj[1].size(); i++)
-        {
-            cout <<adj[1][i];
-        }
-       
-
-    
-
+    cin >> t;
+    while (t--)
+        solve();
     return 0;
 }
