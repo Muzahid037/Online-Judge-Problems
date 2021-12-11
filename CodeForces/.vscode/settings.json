@@ -18,6 +18,7 @@
         "cmath": "cpp",
         "numeric": "cpp",
         "iostream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "complex": "cpp"
     }
 }
