@@ -1,6 +1,6 @@
 *.txt
 *.vscode
 *.cph
-*.o
+.o
 *.exe
 
