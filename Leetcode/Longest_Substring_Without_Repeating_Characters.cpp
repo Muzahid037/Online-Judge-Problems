@@ -37,7 +37,7 @@ typedef set<int>::iterator sit;
 ///-----------------------------------------------------------------------///
 
 ///_________________________________OTHERS________________________________///
-#define push_back push_back
+#define pb push_back
 #define all(c) c.begin(), c.end()
 #define MK make_pair
 #define F first
@@ -115,60 +115,31 @@ const ll infLL = 9000000000000000000;
 #define MOD 1000000007
 ///-----------------------------------------------------------------------///
 
-class Solution
+void solve()
 {
-public:
-    void printVector(vector<int> &nums)
+    string s;
+    cin >> s;
+    map<char, int> cnt, pos;
+    int ans = 0, len = 0, left = 1;
+    for (int i = 0; i < s.size(); i++)
     {
-        for (int i = 0; i < nums.size(); i++)
+        if (cnt[s[i]] > 0)
         {
-            cout << nums[i] << " ";
+            left= max(left,pos[s[i]]);
+            len = (i + 1) -left;
+            pos[s[i]]=i+1;
         }
-        cout << endl;
-    }
-    vector<vector<int>> threeSum(vector<int> &nums)
-    {
-
-      sort(nums.begin(), nums.end());
-        set<vector<int>> unique_ans;
-        int n = nums.size();
-
-        if (n < 3)
-            return {};
-
-        for (int i = 0; i < n - 2; i++)
+        else
         {
-            int left = i + 1, right = n - 1;
-            // vector<int> trplt;
-            while (left < right)
-            {
-                // cout << nums[i] << " " << nums[left] << " " << nums[right]<<endl;
-                int sum = nums[i] + nums[left] + nums[right];
-                // cout<<sum<<endl;
-                if (sum == 0)
-                {
-                    unique_ans.insert({nums[i], nums[left], nums[right]});
-                    left++;
-                    right--;
-                    // trplt.clear();
-                }
-                else if (sum > 0)
-                {
-                    right--;
-                }
-                else
-                {
-                    left++;
-                }
-            }
+            cnt[s[i]]++;
+            pos[s[i]] = i + 1;
+            len++;
         }
-        vector<vector<int>> results;
-        copy(unique_ans.begin(), unique_ans.end(),
-             back_inserter(results));
-        return results;
+        // cout << len << endl;
+        ans = max(ans, len);
     }
-};
-
+    cout << ans << endl;
+}
 int main()
 {
     Boost();
@@ -178,27 +149,10 @@ int main()
     freopen("output.txt", "w", stdout);
 #endif
 
-    Solution obj;
-    int n;
-    cin >> n;
-    vector<int> nums{-1, 0, 1, 2, -1, -4};
-    // for (int i = 0; i < n; i++)
-    // {
-    //     cin >> nums[i];
-    // }
-    // obj.printVector(nums);
-
-    // obj.threeSum();
-    vector<vector<int>> unique_unique_ans = obj.threeSum(nums);
-
-    for (int i = 0; i < unique_unique_ans.size(); i++)
-    {
-        for (int j = 0; j < unique_unique_ans[i].size(); j++)
-        {
-            cout << unique_unique_ans[i][j] << " ";
-        }
-        cout << endl;
-    }
-
+    int t;
+    t = 1;
+    // cin >> t;
+    while (t--)
+        solve();
     return 0;
 }

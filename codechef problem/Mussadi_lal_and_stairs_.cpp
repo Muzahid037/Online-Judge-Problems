@@ -37,7 +37,7 @@ typedef set<int>::iterator sit;
 ///-----------------------------------------------------------------------///
 
 ///_________________________________OTHERS________________________________///
-#define push_back push_back
+#define pb push_back
 #define all(c) c.begin(), c.end()
 #define MK make_pair
 #define F first
@@ -114,61 +114,38 @@ const int inf = 2000000000;
 const ll infLL = 9000000000000000000;
 #define MOD 1000000007
 ///-----------------------------------------------------------------------///
-
-class Solution
+int dp[100005];
+int findWays(int n, int m)
 {
-public:
-    void printVector(vector<int> &nums)
+    // if (n < 2)
+    //     return n;
+    if (n < 3 || dp[n] != 0)
+        return dp[n];
+    int ans = 0;
+    for (int i = 1; i <= min(n, m); i++)
     {
-        for (int i = 0; i < nums.size(); i++)
+        int x = dp[n - i];
+        if (x == 0)
         {
-            cout << nums[i] << " ";
+            x = (findWays(n - i, m)) % 1000000007;
         }
-        cout << endl;
+        dp[n - i] = x;
+        ans = (ans + x) % 1000000007;
     }
-    vector<vector<int>> threeSum(vector<int> &nums)
-    {
-
-      sort(nums.begin(), nums.end());
-        set<vector<int>> unique_ans;
-        int n = nums.size();
-
-        if (n < 3)
-            return {};
-
-        for (int i = 0; i < n - 2; i++)
-        {
-            int left = i + 1, right = n - 1;
-            // vector<int> trplt;
-            while (left < right)
-            {
-                // cout << nums[i] << " " << nums[left] << " " << nums[right]<<endl;
-                int sum = nums[i] + nums[left] + nums[right];
-                // cout<<sum<<endl;
-                if (sum == 0)
-                {
-                    unique_ans.insert({nums[i], nums[left], nums[right]});
-                    left++;
-                    right--;
-                    // trplt.clear();
-                }
-                else if (sum > 0)
-                {
-                    right--;
-                }
-                else
-                {
-                    left++;
-                }
-            }
-        }
-        vector<vector<int>> results;
-        copy(unique_ans.begin(), unique_ans.end(),
-             back_inserter(results));
-        return results;
-    }
-};
-
+    return ans;
+}
+void solve()
+{
+    int n, m = 3;
+    cin >> n;
+    dp[0] = 0;
+    dp[1] = 1;
+    dp[2] = 2;
+    dp[3] = 4;  /// eita na dile findWays(n+1,m) dewa lagbe
+    int ans = findWays(n, m);
+    cout << ans << endl;
+    // cout<<n<<m;
+}
 int main()
 {
     Boost();
@@ -178,27 +155,10 @@ int main()
     freopen("output.txt", "w", stdout);
 #endif
 
-    Solution obj;
-    int n;
-    cin >> n;
-    vector<int> nums{-1, 0, 1, 2, -1, -4};
-    // for (int i = 0; i < n; i++)
-    // {
-    //     cin >> nums[i];
-    // }
-    // obj.printVector(nums);
-
-    // obj.threeSum();
-    vector<vector<int>> unique_unique_ans = obj.threeSum(nums);
-
-    for (int i = 0; i < unique_unique_ans.size(); i++)
-    {
-        for (int j = 0; j < unique_unique_ans[i].size(); j++)
-        {
-            cout << unique_unique_ans[i][j] << " ";
-        }
-        cout << endl;
-    }
-
+    int t;
+    t = 1;
+    cin >> t;
+    while (t--)
+        solve();
     return 0;
 }

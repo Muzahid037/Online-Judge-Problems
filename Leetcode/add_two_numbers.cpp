@@ -115,90 +115,58 @@ const ll infLL = 9000000000000000000;
 #define MOD 1000000007
 ///-----------------------------------------------------------------------///
 
+struct ListNode
+{
+
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
 class Solution
 {
 public:
-    void printVector(vector<int> &nums)
+    ListNode addTwoNumbers(ListNode *l1, ListNode *l2)
     {
-        for (int i = 0; i < nums.size(); i++)
+        ListNode *head = new ListNode(-1);
+        ListNode *curr = head;
+        int carry = 0, sum, x, y;
+        while (l1 != NULL || l2 != NULL)
         {
-            cout << nums[i] << " ";
-        }
-        cout << endl;
-    }
-    vector<vector<int>> threeSum(vector<int> &nums)
-    {
-
-      sort(nums.begin(), nums.end());
-        set<vector<int>> unique_ans;
-        int n = nums.size();
-
-        if (n < 3)
-            return {};
-
-        for (int i = 0; i < n - 2; i++)
-        {
-            int left = i + 1, right = n - 1;
-            // vector<int> trplt;
-            while (left < right)
+            if (l1 != NULL)
             {
-                // cout << nums[i] << " " << nums[left] << " " << nums[right]<<endl;
-                int sum = nums[i] + nums[left] + nums[right];
-                // cout<<sum<<endl;
-                if (sum == 0)
-                {
-                    unique_ans.insert({nums[i], nums[left], nums[right]});
-                    left++;
-                    right--;
-                    // trplt.clear();
-                }
-                else if (sum > 0)
-                {
-                    right--;
-                }
-                else
-                {
-                    left++;
-                }
+                x = l1->val;
+                l1 = l1->next;
             }
+            else
+                x = 0;
+            if (l2 != NULL)
+            {
+                y = l2->val;
+                l2 = l2->next;
+            }
+            else
+                y = 0;
+            sum = x + y + carry;
+            carry = sum / 10;
+            curr->next = new ListNode(sum % 10);
+            curr = curr->next;
         }
-        vector<vector<int>> results;
-        copy(unique_ans.begin(), unique_ans.end(),
-             back_inserter(results));
-        return results;
+        if (carry)
+            curr->next = new ListNode(1);
+        return head->next;
     }
 };
 
 int main()
 {
-    Boost();
-
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
 
-    Solution obj;
-    int n;
-    cin >> n;
-    vector<int> nums{-1, 0, 1, 2, -1, -4};
-    // for (int i = 0; i < n; i++)
-    // {
-    //     cin >> nums[i];
-    // }
-    // obj.printVector(nums);
-
-    // obj.threeSum();
-    vector<vector<int>> unique_unique_ans = obj.threeSum(nums);
-
-    for (int i = 0; i < unique_unique_ans.size(); i++)
-    {
-        for (int j = 0; j < unique_unique_ans[i].size(); j++)
-        {
-            cout << unique_unique_ans[i][j] << " ";
-        }
-        cout << endl;
-    }
 
     return 0;
 }
